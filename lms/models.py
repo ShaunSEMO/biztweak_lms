@@ -22,7 +22,7 @@ class Course(models.Model):
     id = models.AutoField(primary_key=True)
     consultant_id = models.ForeignKey(Consultant, on_delete=models.PROTECT, related_name='consultant_course')
     course_title = models.CharField(max_length=250)
-    course_description = models.CharField(max_length=9999, blank=True)
+    course_description = models.TextField(blank=True)
 
     def __str__(self):
         return f'Course_{self.id}_{self.course_title}'
@@ -31,7 +31,7 @@ class Course_module(models.Model):
     id = models.AutoField(primary_key=True)
     course_id = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='course_module')
     module_title = models.CharField(max_length=250)
-    module_description = models.CharField(max_length=9999, blank=True)
+    module_description = models.TextField(blank=True)
 
     def __str__(self):
         return f'Module_{self.id}_{self.module_title}'
@@ -43,7 +43,7 @@ def store_course_content(instance, filename):
 class Course_content(models.Model):
     id = models.AutoField(primary_key=True)
     module_id = models.ForeignKey(Course_module, on_delete=models.CASCADE, related_name='course_content')
-    content_title = models.CharField(max_length=9999,blank=True)
+    content_title = models.TextField(blank=True)
     content_image = models.ImageField(upload_to=store_course_content, default=None)
     content_video = models.FileField(upload_to=store_course_content, default=None)
 
@@ -54,7 +54,7 @@ class Course_quiz(models.Model):
     id = models.AutoField(primary_key=True)
     module_id = models.ForeignKey(Course_module, on_delete=models.CASCADE, related_name='course_quiz')
     quiz_title = models.CharField(max_length=250)
-    quiz_description = models.CharField(max_length=9999, blank=True)
+    quiz_description = models.TextField(blank=True)
 
     def __str__(self):
         return f'Quiz_{self.id}_{self.quiz_title}'
@@ -62,8 +62,8 @@ class Course_quiz(models.Model):
 class Quiz_question(models.Model):
     id = models.AutoField(primary_key=True)
     quiz_id = models.ForeignKey(Course_quiz, on_delete=models.CASCADE,related_name='quiz_question')
-    question_title = models.CharField(max_length=9999)
-    question = models.CharField(max_length=9999)
+    question_title = models.TextField()
+    question = models.TextField()
     question_binary = models.BinaryField(max_length=None, blank=True)
     difficulty = models.IntegerField()
 
@@ -76,7 +76,7 @@ class Answer(models.Model):
     entr_id = models.ForeignKey(Entrepreneur, on_delete=models.CASCADE, related_name='entr_answer')
     quiz_question = models.ForeignKey(Quiz_question, on_delete=models.CASCADE, related_name='quiz_name')
     answer = models.BinaryField(max_length=None, blank=True)
-    answer_par = models.CharField(max_length=9999)
+    answer_par = models.TextField()
 
     def __str__(self):
         return f'Answer_{self.id}_{self.entr_id}'

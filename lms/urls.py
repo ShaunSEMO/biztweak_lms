@@ -7,5 +7,5 @@ from django.conf import settings
 app_name = 'lms'
 
 urlpatterns = [
-    path('home', views.home, name='homepage'),
+    path('', views.home, name='homepage'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
