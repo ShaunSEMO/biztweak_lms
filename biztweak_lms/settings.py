@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'lms',
     'reset_migrations',
+    'user_accounts',
 ]
 
 MIDDLEWARE = [

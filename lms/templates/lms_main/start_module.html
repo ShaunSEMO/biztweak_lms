@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    
+    <div class="row">
+        <div class="col-md-8">
+            <div class="content">
+
+                {% for content in course_content %}
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <iframe class="embed-responsive-item" src="{{ course_content.content_video }}" allowfullscreen></iframe>
+                    </div>
+                    <br>
+                    <p>{{ course_content.content_text }}</p>
+                {% endfor %}
+                
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-white bg-info mb-3">
+                <div class="card-header">
+                    {{ course.course_title }}
+                </div>
+                <div class="card-body">
+                    {{ course.course_icon | safe }}
+                    <br>
+                    {% for module in course_modules %}
+                        <a href="/course/enroll/module_start/{{ module.id }}">
+                            <div class="alert alert-primary" role="alert">
+                                {{ module }}
+                            </div>
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

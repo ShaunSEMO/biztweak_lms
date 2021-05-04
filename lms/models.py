@@ -22,6 +22,7 @@ class Course(models.Model):
     id = models.AutoField(primary_key=True)
     consultant_id = models.ForeignKey(Consultant, on_delete=models.PROTECT, related_name='consultant_course')
     course_title = models.CharField(max_length=250)
+    course_icon = models.CharField(max_length=250, blank=True)
     course_description = models.TextField(blank=True)
 
     def __str__(self):
@@ -37,15 +38,23 @@ class Course_module(models.Model):
         return f'Module_{self.id}_{self.module_title}'
 
 # store course_content with dynamic file name
-def store_course_content(instance, filename):
-    return f'module_content_image_id{instance.course_content.id}_{filename}'
+def store_course_content_image(instance, filename):
+    return f'module_content_image_id{instance.id}_{filename}'
+
+def store_course_content_video(instance, filename):
+    return f'module_content_video_id{instance.id}_{filename}'
+
+def store_course_content_audio(instance, filename):
+    return f'module_content_audio_id{instance.id}_{filename}'
 
 class Course_content(models.Model):
     id = models.AutoField(primary_key=True)
     module_id = models.ForeignKey(Course_module, on_delete=models.CASCADE, related_name='course_content')
-    content_title = models.TextField(blank=True)
-    content_image = models.ImageField(upload_to=store_course_content, default=None)
-    content_video = models.FileField(upload_to=store_course_content, default=None)
+    content_title = models.CharField(max_length=500,blank=True)
+    content_text = models.TextField(blank=True)
+    content_image = models.ImageField(upload_to=store_course_content_image, default=None)
+    content_video = models.FileField(upload_to=store_course_content_video, default=None)
+    content_audio = models.FileField(upload_to=store_course_content_audio, default=None)
 
     def __str__(self):
         return f'Content_{self.id}_{self.content_title}'

@@ -73,8 +73,8 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(primary_key=True, serialize=False)),
                 ('content_title', models.TextField(blank=True)),
-                ('content_image', models.ImageField(default=None, upload_to=lms.models.store_course_content)),
-                ('content_video', models.FileField(default=None, upload_to=lms.models.store_course_content)),
+                ('content_image', models.ImageField(default=None, upload_to=lms.models.store_course_content_image)),
+                ('content_video', models.FileField(default=None, upload_to=lms.models.store_course_content_video)),
                 ('module_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='course_content', to='lms.course_module')),
             ],
         ),

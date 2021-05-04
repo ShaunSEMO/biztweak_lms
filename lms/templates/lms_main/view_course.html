@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="container row">
+        <div class="col-md-4">
+            <div class="card text-white bg-primary mb-3">
+                <!-- <div class="card-header"></div> -->
+                <div class="card-body" style="text-align: center;">
+                    <i style="font-size: 100px;" class="fas fa-address-card"></i>
+                    <p><h5>Name: </h5>{{ logged_user.first_name }} {{ logged_user.last_name }}</p>
+                    <p><h5>E-mail: </h5>{{ logged_user.email }}</p>
+                    <small><h5>Last login: </h5>{{ logged_user.last_login }}</small>
+                </div>
+
+
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="card text-white bg-info mb-3">
+                <div class="card-header">
+                    {{ course.course_title }}
+                </div>
+                <div class="card-body">
+                    {{ course.course_icon | safe }}
+                    <p>{{ course.course_description }}</p>
+                    <hr>
+                    <h4>Course Modules</h4>
+                    <ol>
+                        {% for module in course_modules %}
+                            <li>
+                                <p>{{ module.module_title }} - <span>{{ module.module_description }}</span></p>
+                            </li>
+                        {% endfor %}
+                    </ol>
+                    
+                    <a class="btn btn-primary" href="/course/enroll/{{ course.id }}">Enroll</a>
+                </div>
+            </div>  
+        </div>
+    </div>
+
+{% endblock %}

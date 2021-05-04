@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    
+    <div class="row">
+        <div class="col-md-8">
+            <div class="content">
+                <h2>Welcome back to the course!</h2>
+                <br>
+                <br>
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                </div>
+                <p>Complete!</p>
+                <br>
+                <br>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div>
+                            <div class="card" style="width: 18rem;">
+                                <div class="card-header">
+                                    Module 1 Scores
+                                </div>
+                                <div class="card-body">
+                                    <div class="progress">
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: 78%" aria-valuenow="78" aria-valuemin="0" aria-valuemax="100">78%</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div>
+                            <div class="card" style="width: 18rem;">
+                                <div class="card-header">
+                                    Module 2 Scores
+                                </div>
+                                <div class="card-body">
+                                    <div class="progress">
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+                                    </div>
+                                    <p>Not yet Complete</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-white bg-info mb-3" style="text-align: center;">
+                <div class="card-header">
+                    {{ course.course_title }}
+                </div>
+                <div class="card-body">
+                    {{ course.course_icon | safe }}
+                    <br>
+                    <br>
+                    {% for module in course_modules %}
+                        <a href="/course/enroll/module_start/{{ module.id }}">
+                            <div class="alert alert-primary" role="alert">
+                                {{ module }}
+                            </div>
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
